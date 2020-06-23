@@ -340,7 +340,7 @@ namespace Microsoft.DotNet.DarcLib
                         {
                             foreach (LibGit2Sharp.Remote r in localRepo.Network.Remotes)
                             {
-                                IEnumerable<string> refSpecs = r.FetchRefSpecs.Select(x => x.Specification);
+                                IEnumerable<string> refSpecs = r.FetchRefSpecs.Select(x => x.Specification).Append($"+refs/pull/*:refs/remotes/{r.Name}/pull/*");
                                 _logger.LogDebug($"Fetching {string.Join(";", refSpecs)} from {r.Url} in {repoDir}");
                                 try
                                 {

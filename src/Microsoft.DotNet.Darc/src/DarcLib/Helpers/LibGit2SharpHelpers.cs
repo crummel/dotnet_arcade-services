@@ -116,7 +116,7 @@ namespace Microsoft.DotNet.DarcLib.Helpers
             {
                 try
                 {
-                    IEnumerable<string> refSpecs = remote.FetchRefSpecs.Select(x => x.Specification);
+                    IEnumerable<string> refSpecs = remote.FetchRefSpecs.Select(x => x.Specification).Append($"+refs/pull/*:refs/remotes/{remote.Name}/pull/*");
                     log.LogDebug($"Fetching {string.Join(";", refSpecs)} from {remote.Url} in {repo.Info.Path}");
                     LibGit2Sharp.Commands.Fetch(repo, remote.Name, refSpecs, new FetchOptions(), $"Fetching {repo.Info.Path} from {remote.Url}");
                 }
